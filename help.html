@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Help · Savannah Project Control</title>
+    <link rel="icon" href="assets/savannah-mark.jpg">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body class="help-page">
+    <header class="help-header">
+      <a class="brand-lockup" href="index.html#overview">
+        <img src="assets/savannah-mark.jpg" alt="" width="40" height="40">
+        <span><strong>Savannah</strong><small>Project Control Help</small></span>
+      </a>
+      <a class="button gold compact" href="index.html#overview">Return to project</a>
+    </header>
+
+    <div class="help-layout">
+      <nav class="help-nav" aria-label="Help contents">
+        <strong>Contents</strong>
+        <a href="#getting-started">Getting started</a>
+        <a href="#man-days">Man-days</a>
+        <a href="#programme-grid">Programme grid</a>
+        <a href="#programme-reset">Reset future values</a>
+        <a href="#physical-quantity">Physical quantity</a>
+        <a href="#materials">Materials</a>
+        <a href="#variations">Variations</a>
+        <a href="#calendar-exceptions">Calendar exceptions</a>
+        <a href="#task-controls">Task controls</a>
+        <a href="#project-settings">Project settings</a>
+        <a href="#checks">Checks</a>
+        <a href="#audit">Audit trail</a>
+        <a href="#exports">Export and backup</a>
+        <a href="#local-storage">Local storage</a>
+      </nav>
+
+      <main class="help-content">
+        <span class="eyebrow">Operating guide</span>
+        <h1>Savannah Project Control</h1>
+        <p class="help-lead">
+          This edition runs entirely in your browser. It does not contact a
+          server, ChatGPT, OpenAI or any other service.
+        </p>
+
+        <section id="getting-started">
+          <h2>Getting started</h2>
+          <ol>
+            <li>Open <strong>index.html</strong> in Firefox, Chrome or Edge.</li>
+            <li>Open <strong>Setup</strong> and confirm the project, status date, tasks and working calendar.</li>
+            <li>Use <strong>Daily input</strong> for actual labour and physical progress.</li>
+            <li>Use <strong>Programme</strong> to test daily labour allocations.</li>
+            <li>Resolve critical <strong>Checks</strong> before exporting a report.</li>
+            <li>Export a complete JSON backup at each reporting cycle.</li>
+          </ol>
+        </section>
+
+        <section id="man-days">
+          <h2>Man-days</h2>
+          <p>
+            One man-day is one person working the configured productive day.
+            The supplied system starts at <strong>8.9 labour hours per
+            man-day</strong>. Two people for one day therefore equal two
+            man-days. Decimal entries such as 0.5 are allowed for planning.
+          </p>
+          <p>
+            Source allowances remain stored in labour hours. Changing the
+            hours in one man-day changes the displayed planning equivalents;
+            it does not rewrite imported source hours.
+          </p>
+        </section>
+
+        <section id="programme-grid">
+          <h2>Programme grid</h2>
+          <p>
+            Every task row covers the complete project date range. Type a
+            man-day value directly into any date. The typed cell becomes a
+            fixed planning point and later automatic working days immediately
+            redistribute the then-remaining task allowance to its target
+            finish. A manual value of 0 deliberately blocks that day.
+          </p>
+          <p>
+            Automatic projections use Monday to Friday and skip calendar
+            exceptions. Weekend and exception cells remain editable for
+            deliberate work. Past weeks start collapsed; click a past week
+            heading or use <strong>Toggle all past weeks</strong> to reveal
+            them. The thin red column marks today.
+          </p>
+          <p>
+            Allocation view shows all values. Heatmap view emphasises
+            concentration relative to assigned or practical crew. Manual view
+            suppresses automatic placeholders so typed planning points are
+            easier to see. Target and forecast lines are reversible overlays.
+          </p>
+        </section>
+
+        <section id="programme-reset">
+          <h2>Reset future values</h2>
+          <p>
+            The red-outlined button at the top of Programme removes manual
+            programme values strictly after today and clears task forecast
+            overrides. It then restores the default weekday projections.
+          </p>
+          <p>
+            It does not delete history, today, daily progress, original
+            allowances, approved variations, calendar rules or audit events.
+            The action requires confirmation and is recorded in the audit
+            trail.
+          </p>
+        </section>
+
+        <section id="status-date">
+          <h2>Status date</h2>
+          <p>
+            The status date is the cut-off for actual project reporting.
+            Daily entries cannot be later than it. Moving it forward should
+            happen only after elapsed programme cells have been checked and
+            actual labour is complete.
+          </p>
+        </section>
+
+        <section id="daily-input">
+          <h2>Daily input</h2>
+          <p>
+            Enter one record for each unique task, date, workfront and
+            variation combination. Enter daily values, never cumulative
+            totals. The system derives cumulative progress and forecast
+            position.
+          </p>
+        </section>
+
+        <section id="physical-quantity">
+          <h2>Physical quantity completed</h2>
+          <p>
+            “Quantity” always means the task-specific unit shown beside that
+            task: for example square metres, lineal metres, each, rooms or a
+            defined weighted unit. It is not an undefined generic “unit”.
+            Quantity must be measured consistently throughout the task.
+          </p>
+        </section>
+
+        <section id="actual-hours">
+          <h2>Actual and earned hours</h2>
+          <p>
+            Actual hours are approved-scope labour entered up to the status
+            date. Earned hours are the original/revised budget rate multiplied
+            by completed physical quantity, capped at the approved quantity
+            for calculation. A negative productivity variance means more
+            labour has been spent than earned.
+          </p>
+        </section>
+
+        <section id="forecast-variance">
+          <h2>Forecast variance</h2>
+          <p>
+            Forecast variance is revised budget hours minus forecast total
+            hours. Positive is within allowance; negative indicates an
+            expected overrun. The forecast uses the budget rate until reliable
+            progress reaches either configured threshold, then uses actual
+            hours per completed physical unit unless a reasoned manual rate is
+            present.
+          </p>
+        </section>
+
+        <section id="materials">
+          <h2>Materials</h2>
+          <p>
+            Link each material package to its controlling task. The suggested
+            order date counts lead time plus buffer backwards from the
+            required-on-site date using working days. Purchase-order date and
+            supplier-confirmed delivery remain separate facts. “Off the shelf”
+            is not a confirmed delivery.
+          </p>
+        </section>
+
+        <section id="variations">
+          <h2>Variations</h2>
+          <p>
+            Register exposure early. Submitted and exposure hours remain
+            visible without changing approved task budgets. Only
+            <strong>Approved</strong> or <strong>Partially approved</strong>
+            records add their approved hours and physical units to the linked
+            task.
+          </p>
+        </section>
+
+        <section id="calendar-exceptions">
+          <h2>Calendar exceptions</h2>
+          <p>
+            Enter a single date or an inclusive start/end range for weather,
+            shutdowns, holidays, access delays or other non-working periods.
+            Automatic programme values skip every date in the range. The range
+            remains visible, editable and deletable in its collapsed register.
+          </p>
+        </section>
+
+        <section id="task-controls">
+          <h2>Task controls</h2>
+          <p>
+            Add Savannah-only tasks from Setup. User-created tasks can be
+            fully edited and deleted once their linked operational records are
+            removed. Imported baseline names, quantities, units and source
+            hours are protected; their target dates, crew, workfront, status,
+            criticality and forecast settings remain manageable.
+          </p>
+        </section>
+
+        <section id="project-settings">
+          <h2>Project settings</h2>
+          <p>
+            Status date, target finish, hours per man-day and forecast
+            thresholds affect all calculations. Export a backup before a
+            material change. Source hours are authoritative and are not
+            recalculated from an hourly rate.
+          </p>
+        </section>
+
+        <section id="checks">
+          <h2>Checks</h2>
+          <p>
+            Critical checks identify conditions that make the project position
+            unreliable or adverse. Warnings require review. Information items
+            document explained conditions. Checks are recalculated from current
+            data and do not replace project judgement or client programme
+            validation.
+          </p>
+        </section>
+
+        <section id="audit">
+          <h2>Audit trail</h2>
+          <p>
+            Every write made through the interface creates a local audit event.
+            Events are not editable through the UI and are included in the
+            complete project backup. Importing an older backup intentionally
+            restores that backup’s data and audit history.
+          </p>
+        </section>
+
+        <section id="exports">
+          <h2>Export and backup</h2>
+          <p>
+            <strong>Export CSV</strong> downloads the active page’s relevant
+            data. <strong>Print / PDF</strong> opens the browser print dialog;
+            choose “Save to PDF” for a PDF copy. <strong>Export project</strong>
+            downloads the complete versioned JSON project, including all
+            records and audit history. JSON is the restore format.
+          </p>
+        </section>
+
+        <section id="local-storage">
+          <h2>Local storage and isolation</h2>
+          <p>
+            The application first uses IndexedDB, the browser’s native
+            structured database. If the browser blocks it for local files, the
+            application falls back to browser storage and finally to temporary
+            in-memory operation. The top status badge reports the active mode.
+          </p>
+          <p>
+            Browser data belongs to the current browser profile and can be
+            erased by clearing browser data. It is not a substitute for
+            project backups. Export JSON before moving computers, changing
+            browser profiles, clearing storage or issuing a formal report.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

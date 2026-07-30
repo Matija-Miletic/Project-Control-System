@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta
+      name="description"
+      content="Standalone Savannah Construction project labour, programme, materials and variation control."
+    >
+    <title>Savannah Project Control</title>
+    <link rel="icon" href="assets/savannah-mark.jpg">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/default-data.js" defer></script>
+    <script src="assets/engine.js" defer></script>
+    <script src="assets/db.js" defer></script>
+    <script src="assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to project controls</a>
+
+    <div class="app-frame">
+      <header class="topbar">
+        <button
+          id="menu-toggle"
+          class="icon-button mobile-only"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
+
+        <a class="brand-lockup" href="#overview" aria-label="Savannah Project Control overview">
+          <img src="assets/savannah-mark.jpg" alt="" width="40" height="40">
+          <span>
+            <strong>Savannah</strong>
+            <small>Project Control</small>
+          </span>
+        </a>
+
+        <div class="project-identity">
+          <span class="eyebrow">Active project</span>
+          <strong id="project-name">Loading project…</strong>
+        </div>
+
+        <div class="topbar-actions">
+          <span id="storage-status" class="storage-badge" title="Local data storage status">
+            Checking storage…
+          </span>
+          <button id="import-project" class="button ghost compact" type="button">
+            Import
+          </button>
+          <button id="master-export" class="button gold compact" type="button">
+            Export project
+          </button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden>
+        </div>
+      </header>
+
+      <aside id="sidebar" class="sidebar" aria-label="Project navigation">
+        <nav id="main-nav">
+          <a href="#overview" data-route="overview">
+            <span class="nav-icon" aria-hidden="true">⌂</span>Overview
+          </a>
+          <a href="#daily" data-route="daily">
+            <span class="nav-icon" aria-hidden="true">＋</span>Daily input
+          </a>
+          <a href="#programme" data-route="programme">
+            <span class="nav-icon" aria-hidden="true">▦</span>Programme
+          </a>
+          <a href="#materials" data-route="materials">
+            <span class="nav-icon" aria-hidden="true">◇</span>Materials
+          </a>
+          <a href="#variations" data-route="variations">
+            <span class="nav-icon" aria-hidden="true">△</span>Variations
+          </a>
+          <a href="#calendar" data-route="calendar">
+            <span class="nav-icon" aria-hidden="true">□</span>Calendar
+          </a>
+          <a href="#checks" data-route="checks">
+            <span class="nav-icon" aria-hidden="true">!</span>Checks
+            <span id="check-count" class="nav-count" hidden>0</span>
+          </a>
+          <a href="#audit" data-route="audit">
+            <span class="nav-icon" aria-hidden="true">≡</span>Audit
+          </a>
+          <a href="#setup" data-route="setup">
+            <span class="nav-icon" aria-hidden="true">⚙</span>Setup
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a class="help-link" href="help.html" target="_blank" rel="noopener">
+            <span class="help-symbol" aria-hidden="true">?</span>
+            Help and operating guide
+          </a>
+          <p>Runs entirely on this device. No account, internet connection or server is used.</p>
+        </div>
+      </aside>
+
+      <main id="workspace" class="main-content" tabindex="-1">
+        <div id="storage-warning" class="notice warning" hidden role="status"></div>
+
+        <header class="page-header">
+          <div>
+            <span id="page-eyebrow" class="eyebrow">Project position</span>
+            <h1 id="page-title">Overview</h1>
+            <p id="page-description">Current labour, programme and control position.</p>
+          </div>
+          <div class="page-actions">
+            <button id="page-csv" class="button secondary" type="button">Export CSV</button>
+            <button id="page-print" class="button secondary" type="button">Print / PDF</button>
+          </div>
+        </header>
+
+        <div id="feedback" class="inline-feedback" role="status" aria-live="polite" hidden></div>
+        <section id="page-content" aria-live="polite" aria-busy="true">
+          <div class="loading-state">
+            <span class="loading-dot" aria-hidden="true"></span>
+            Preparing project controls…
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="item-dialog" class="modal">
+      <div class="modal-shell">
+        <header class="modal-header">
+          <div>
+            <span id="modal-eyebrow" class="eyebrow">Record</span>
+            <h2 id="modal-title">Edit record</h2>
+          </div>
+          <button id="modal-close" class="icon-button" aria-label="Close dialog" type="button">×</button>
+        </header>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </dialog>
+
+    <dialog id="confirm-dialog" class="modal confirm-modal">
+      <form method="dialog" class="modal-shell">
+        <header class="modal-header">
+          <div>
+            <span class="eyebrow">Confirmation required</span>
+            <h2 id="confirm-title">Confirm action</h2>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="Close dialog" type="submit">×</button>
+        </header>
+        <div class="modal-body">
+          <p id="confirm-message"></p>
+          <div class="modal-actions">
+            <button class="button secondary" value="cancel" type="submit">Cancel</button>
+            <button id="confirm-action" class="button danger" value="confirm" type="submit">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <noscript>
+      <div class="noscript-message">
+        JavaScript is required. Enable JavaScript for this local file and reopen
+        <strong>index.html</strong>.
+      </div>
+    </noscript>
+  </body>
+</html>

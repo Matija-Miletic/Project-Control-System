@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tests · Savannah Project Control</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="../assets/default-data.js" defer></script>
+    <script src="../assets/engine.js" defer></script>
+    <script src="engine.test.js" defer></script>
+  </head>
+  <body class="test-page">
+    <main class="test-shell">
+      <span class="eyebrow">Dependency-free verification</span>
+      <h1>Calculation tests</h1>
+      <p>These tests run locally in the browser and do not use a server.</p>
+      <div id="test-summary" class="notice">Running…</div>
+      <ol id="test-results" class="test-results"></ol>
+      <p><a class="button secondary" href="../index.html#overview">Return to application</a></p>
+    </main>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        var results = window.SPCTests.run();
+        var failures = results.filter(function (item) { return !item.ok; });
+        var summary = document.getElementById("test-summary");
+        summary.textContent = (results.length - failures.length) + " of " +
+          results.length + " tests passed.";
+        summary.className = "notice " + (failures.length ? "warning" : "success");
+        document.getElementById("test-results").innerHTML = results.map(function (item) {
+          return "<li class=\"" + (item.ok ? "pass" : "fail") + "\"><strong>" +
+            (item.ok ? "PASS" : "FAIL") + "</strong> " + item.name +
+            (item.error ? "<small>" + item.error + "</small>" : "") + "</li>";
+        }).join("");
+      });
+    </script>
+  </body>
+</html>
